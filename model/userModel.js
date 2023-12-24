@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const userSchema = mongoose.Schema({
   name: {
@@ -20,7 +21,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: [true, 'Please add a password'],
     minLength: [6, 'Password must be atleast 6 characters long'],
-    maxLength: [23, 'Password cannot be longer then 23 characters'],
+    // maxLength: [23, 'Password cannot be longer then 23 characters'],
   },
   photo: {
     type: String,
@@ -39,6 +40,14 @@ const userSchema = mongoose.Schema({
   },
 }, {
   timestamps: true,
+});
+
+// Encrypt password before saving to DB
+userSchema.pre('save', async (next) => {
+  // Hash the password
+  const salt = await bcrypt.genSalt();
+  const hashedPassword = bcrypt.hash(this.password, salt);
+  this.password = hashedPassword;
 });
 
 const User = mongoose.model('User', userSchema);
