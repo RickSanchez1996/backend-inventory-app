@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
-const dotenv = require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const userRoute = require('./routes/userRoute');
-const errorHandler = require('./middleware/errorMiddleware');
+const dotenv = require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const userRoute = require("./routes/userRoute");
+const errorHandler = require("./middleware/errorMiddleware");
 
 const app = express();
 
@@ -16,12 +16,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Routes Middleware
-app.use('/api/users', userRoute);
+app.use("/api/users", userRoute);
 
 // Routes
 
-app.get('/', (req, res) => {
-  res.send('Home Page');
+app.get("/", (req, res) => {
+  res.send("Home Page");
 });
 
 // Error Middleware

@@ -1,9 +1,9 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 
-const asyncHandler = require('express-async-handler');
+const asyncHandler = require("express-async-handler");
 
-const User = require('../model/userModel');
+const User = require("../model/userModel");
 
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
@@ -11,12 +11,12 @@ const registerUser = asyncHandler(async (req, res) => {
   // Validation
   if (!name || !email || !password) {
     res.status(400);
-    throw new Error('Please fill in all required fields');
+    throw new Error("Please fill in all required fields");
   }
 
   if (password.length < 6) {
     res.status(400);
-    throw new Error('Password must be atleast 6 characters');
+    throw new Error("Password must be atleast 6 characters");
   }
 
   // Check if user email already exists
@@ -24,7 +24,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   if (userExists) {
     res.status(400);
-    throw new Error('Email has already been registered');
+    throw new Error("Email has already been registered");
   }
 
   // Create new user
@@ -48,7 +48,7 @@ const registerUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(400);
-    throw new Error('Invalid user data');
+    throw new Error("Invalid user data");
   }
 });
 module.exports = {
